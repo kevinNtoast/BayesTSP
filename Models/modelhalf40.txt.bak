@@ -1,0 +1,23 @@
+# TSP determinism
+model{
+  for(i in 1:subjects){
+    for(k in 1:cities){
+      for(j in 1:9){
+        for(l in 1:14){
+          theta[i,l+38*(j-1),k] = exp(-1*gamma[i,1]*dist[n*(i-1)+l+38*(j-1),k])
+		  theta[i,l+14+38*(j-1),k] = exp(-1*gamma[i,2]*dist[n*(i-1)+l+14+38*(j-1),k])
+        }
+      }
+    }
+  }
+  for(i in 1:subjects){
+    for(j in 1:n){
+      y[j,i] ~ dcat(theta[i,j , ])
+    }
+  }
+  
+  for(i in 1:subjects){
+    gamma[i,1] ~ dunif(0,50)
+    gamma[i,2] ~ dunif(0,50)
+  }
+}

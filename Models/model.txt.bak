@@ -1,0 +1,9 @@
+model{
+  for (i in 2:n-1){
+    y[i] ~ dcat(theta[i, ])
+    for (j in 1:n){
+          theta[i, j] = exp(-gamma*d[i-1, j])
+    }
+  }
+  gamma ~ dunif(0,50)
+}

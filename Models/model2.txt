@@ -1,0 +1,10 @@
+# TSP determinism
+model{
+  for (i in 1:n){
+    y[i] ~ dcat(theta[i, ])
+    for (j in 1:cities){
+          theta[i, j] = exp(-gamma*dist[i, j])
+    }
+  }
+  gamma ~ dunif(0,50)
+}
